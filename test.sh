@@ -1,3 +1,4 @@
+#!/bin/bash
 /opt/ton-miner/pow-miner-cuda -vv \
   -g $1 \
   -B -F 16 -t 10 kQBWkNKqzCAwA9vjMwRmg7aY75Rf8lByPA9zKXoqGkHi8SM7 \

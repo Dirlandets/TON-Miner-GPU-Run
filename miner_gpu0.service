@@ -6,7 +6,7 @@ After=network.target
 RestartSec=5
 Restart=always
 WorkingDirectory=/opt/ton-miner
-ExecStart=/run_miner EQDwU11kWyEmT2SfA9w4wstTBGj-bIXi9rgoaHa7C31ZLSGb kf-P_TOdwcCh0AXHhBpICDMxStxHenWdLCDLNH5QcNpwMHJ8 0 global.config.json 128 tonlib-cuda-cli 
+ExecStart=/run_miner 1 1
 
 [Install]
 WantedBy=multi-user.target

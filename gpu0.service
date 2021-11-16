@@ -1,0 +1,13 @@
+[Unit]
+Description=TON miner
+After=network.target
+
+[Service]
+RestartSec=5
+Restart=always
+WorkingDirectory=/opt/ton-miner
+ExecStart=/opt/ton-miner/tonlib-cuda-cli -v 3 -C global.config.json -e 'pminer start EQDwU11kWyEmT2SfA9w4wstTBGj-bIXi9rgoaHa7C31ZLSGb kf8gf1PQy4u2kURl-Gz4LbS29eaN4sVdrVQkPO-JL80VhOe6 7 512'
+
+[Install]
+WantedBy=multi-user.target
+Alias=miner_gpu7.service
