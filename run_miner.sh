@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
+
 gpu=${1}  # Index of GPU
 giver=${2}  # Index of giver in givers list below
 
 config=global.config.json
 log_level=3
-
+wallet=$TON_WALLET
 declare -a givers
 givers=(
     kf-kkdY_B7p-77TLn2hUhM6QidWrrsl8FYWCIvBMpZKprBtN
@@ -29,9 +30,9 @@ boost_factors=(
     256
     256
 )
-
-echo "START #$gpu boost-factor: ${boost_factors[gpu]} wallet: $TON_WALET giver: ${givers[giver]}"
-$TON_MINER_PATH -v $log_level -C $config \
--e "pminer start $giver $TON_WALET $gpu $boost_factors"
-echo "FINISH #$gpu boost-factor: ${boost_factors[gpu]} wallet: $TON_WALET giver: ${givers[giver]}"
+cmd="pminer start ${givers[gpu]} $wallet $gpu ${boost_factors[gpu]}"
+echo "START #$gpu boost-factor: ${boost_factors[gpu]} wallet: $wallet giver: ${givers[giver]}"
+echo $cmd
+/opt/ton-miner/tonlib-opencl-cli -v $log_level -C $config -e "${cmd}"
+echo "FINISH #$gpu boost-factor: ${boost_factors[gpu]} wallet: $wallet giver: ${givers[giver]}"
 exit 0

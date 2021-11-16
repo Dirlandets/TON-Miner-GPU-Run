@@ -6,7 +6,7 @@ After=network.target
 RestartSec=5
 Restart=always
 WorkingDirectory=/opt/ton-miner
-ExecStart=/run_miner 1 1
+ExecStart=/run_miner.sh 1 1
 
 [Install]
 WantedBy=multi-user.target
