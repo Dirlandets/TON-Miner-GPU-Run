@@ -2,37 +2,23 @@
 set -e
 
 gpu=${1}  # Index of GPU
-giver=${2}  # Index of giver in givers list below
-
 config=global.config.json
 log_level=3
-wallet=$TON_WALLET
-declare -a givers
-givers=(
-    kf-kkdY_B7p-77TLn2hUhM6QidWrrsl8FYWCIvBMpZKprBtN
-    kf-P_TOdwcCh0AXHhBpICDMxStxHenWdLCDLNH5QcNpwMHJ8
-    kf_NSzfDJI1A3rOM0GQm7xsoUXHTgmdhN5-OrGD8uwL2JMvQ
-    kf8gf1PQy4u2kURl-Gz4LbS29eaN4sVdrVQkPO-JL80VhOe6
-    kf-FV4QTxLl-7Ct3E6MqOtMt-RGXMxi27g4I645lw6MTWraV
-    kf8SYc83pm5JkGt0p3TQRkuiM58O9Cr3waUtR9OoFq716lN-
-    kf8JfFUEJhhpRW80_jqD7zzQteH6EBHOzxiOhygRhBdt4z2N
-    kf8kO6K6Qh6YM4ddjRYYlvVAK7IgyW8Zet-4ZvNrVsmQ4EOF
-    kf91o4NNTryJ-Cw3sDGt9OTiafmETdVFUMvylQdFPoOxIsLm
-    kf9iWhwk9GwAXjtwKG-vN7rmXT3hLIT23RBY6KhVaynRrIK7
-)
-
-declare -a cards
+wallet=EQDwU11kWyEmT2SfA9w4wstTBGj-bIXi9rgoaHa7C31ZLSGb
+bestGgiver=$(curl -s -L https://functions.yandexcloud.net/d4et4hcnpf60ldusbkbl)
 # For every GPU boost factor should be set
 boost_factors=(
     256
     256
     256
     256
+    128
     256
+    128
+    128
 )
-cmd="pminer start ${givers[gpu]} $wallet $gpu ${boost_factors[gpu]}"
-echo "START #$gpu boost-factor: ${boost_factors[gpu]} wallet: $wallet giver: ${givers[giver]}"
-echo $cmd
-/opt/ton-miner/tonlib-opencl-cli -v $log_level -C $config -e "${cmd}"
-echo "FINISH #$gpu boost-factor: ${boost_factors[gpu]} wallet: $wallet giver: ${givers[giver]}"
+cmd="pminer start ${bestGgiver} $wallet $gpu ${boost_factors[gpu]}"
+echo "START ${cmd}"
+/opt/ton-miner/tonlib-cuda-cli -v $log_level -C $config -e "${cmd}"
+echo "FINISH #$gpu boost-factor: ${boost_factors[gpu]} wallet: $wallet giver: ${bestGgiver}"
 exit 0
