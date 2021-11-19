@@ -1,4 +1,5 @@
 #!/bin/bash
+# curl -L -O https://raw.githubusercontent.com/Dirlandets/TON-Miner-GPU-Run/main/run_miner.sh
 set -e
 
 gpu=${1}  # Index of GPU
